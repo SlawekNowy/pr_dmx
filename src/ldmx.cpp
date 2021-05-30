@@ -373,6 +373,12 @@ void Lua::dmx::register_lua_library(Lua::Interface &l)
 	classDefAttribute.def("IsValid",static_cast<void(*)(lua_State*,::dmx::Attribute&)>([](lua_State *l,::dmx::Attribute &attr) {
 		Lua::PushBool(l,attr.type != ::dmx::AttrType::Invalid);
 	}));
+	classDefAttribute.def("AddArrayValue",static_cast<void(*)(lua_State*,::dmx::Attribute&,::dmx::Attribute&)>([](lua_State *l,::dmx::Attribute &attr,::dmx::Attribute &val) {
+		attr.AddArrayValue(val);
+	}));
+	classDefAttribute.def("RemoveArrayValue",static_cast<void(*)(lua_State*,::dmx::Attribute&,::dmx::Attribute&)>([](lua_State *l,::dmx::Attribute &attr,::dmx::Attribute &val) {
+		attr.RemoveArrayValue(val);
+	}));
 	classDefAttribute.def("GetValue",static_cast<void(*)(lua_State*,::dmx::Attribute&)>([](lua_State *l,::dmx::Attribute &attr) {
 		push_attribute_value(l,attr);
 	}));

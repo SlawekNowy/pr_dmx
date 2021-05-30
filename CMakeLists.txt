@@ -12,5 +12,9 @@ add_external_library(lua)
 
 add_include_dir(glm)
 
+add_subdirectory(third_party/util_dmx)
+
 link_generic_module_libraries()
 register_pragma_module(${PROJ_NAME})
+
+add_dependencies(${PROJ_NAME} util_dmx)
