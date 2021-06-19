@@ -26,6 +26,23 @@ static void print_element(std::stringstream &ss,::dmx::Element &e,const std::str
 	}
 }
 
+static std::ostream &operator<<(std::ostream &s,const Mat4 &m)
+{
+	auto first = true;
+	for(uint8_t i=0;i<4;++i)
+	{
+		for(uint8_t j=0;j<4;++j)
+		{
+			if(first)
+				first = false;
+			else
+				s<<" ";
+			s<<m[i][j];
+		}
+	}
+	return s;
+}
+
 static void print_attribute(std::stringstream &ss,::dmx::Attribute &attr,const std::string &t,std::unordered_map<::dmx::Element*,bool> &iteratedEls,std::unordered_map<::dmx::Attribute*,bool> &iteratedAttrs)
 {
 	auto it = iteratedAttrs.find(&attr);
