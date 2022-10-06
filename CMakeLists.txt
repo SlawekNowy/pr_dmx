@@ -12,7 +12,9 @@ add_external_library(lua)
 
 add_include_dir(glm)
 
-add_subdirectory(third_party/util_dmx)
+if (NOT TARGET util_dmx)
+	add_subdirectory(external_libs/util_dmx)
+endif()
 
 link_generic_module_libraries()
 register_pragma_module(${PROJ_NAME})
