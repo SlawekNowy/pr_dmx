@@ -9,16 +9,21 @@ project(${PROJ_NAME} CXX)
 link_external_library(util_dmx)
 
 add_external_library(lua)
+add_external_library(luabind)
+
+link_external_library(vfilesystem)
+link_external_library(luasystem)
+link_external_library(luabind)
+link_external_library(sharedutils)
+link_external_library(mathutil)
+link_external_library(shared)
+link_external_library(ishared)
 
 add_include_dir(glm)
-add_include_dir(mathutil)
-add_include_dir(sharedutils)
-add_include_dir(vfilesystem)
-add_include_dir(luasystem)
-add_include_dir(shared)
 add_include_dir(luajit)
-add_include_dir(luabind)
-add_include_dir(ishared)
+
+set(DEPENDENCY_UTIL_DMX_INCLUDE ${CMAKE_CURRENT_LIST_DIR}/external_libs/util_dmx/include CACHE PATH "" FORCE)
+search_lib_recursive(DEPENDENCY_UTIL_DMX_LIBRARY external_libs/util_dmx/${BINARY_PRAGMA_DIR} util_dmx STATIC)
 
 if (NOT TARGET util_dmx)
 	add_subdirectory(external_libs/util_dmx)
