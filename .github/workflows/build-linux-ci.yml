@@ -27,32 +27,18 @@ jobs:
             generators: "Unix Makefiles"
             build_dir: 'build'
     steps:
-      - uses: actions/checkout@v2
+      - name: Build Module
+        id: build-module
+        uses: Silverlan/pragma/github_actions/build_generic_module@master
         with:
-          submodules: true
-          
-      - name: Setup Pragma Module
-        id: pragma-cmake-defs
-        uses: Silverlan/common_actions/setup_pragma_module@main
-        with:
-          cc_version: ${{ matrix.cc }}
-          cxx_version: ${{ matrix.cxx }}
-
-      - name: Build
-        shell: bash
-        run: |
-          cmake -G "Unix Makefiles" \
-            ${{ steps.pragma-cmake-defs.outputs.cmake_defs }} \
-            -DDEPENDENCY_UTIL_DMX_INCLUDE="external_libs/util_dmx/include/"
-          cmake --build ./ --verbose --target pr_dmx
+          module: 'pr_dmx'
 
       - name: Create Release Files
         shell: bash
         run: |
-          mkdir release
-          mkdir release/modules
-          rsync --mkpath ./libpr_dmx.so release/modules/
-          
+          mkdir -p release/modules
+          cp *pr_dmx* "release/modules/"
+
       - name: Release Binaries
         uses: Silverlan/common_actions/release_nightly_binaries@main
         with:
