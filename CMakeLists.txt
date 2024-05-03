@@ -19,17 +19,22 @@ link_external_library(mathutil)
 link_external_library(shared)
 link_external_library(ishared)
 
+link_external_library(util_dmx)
+
 add_include_dir(glm)
 add_include_dir(luajit)
 
-set(DEPENDENCY_UTIL_DMX_INCLUDE ${CMAKE_CURRENT_LIST_DIR}/external_libs/util_dmx/include CACHE PATH "" FORCE)
-search_lib_recursive(DEPENDENCY_UTIL_DMX_LIBRARY external_libs/util_dmx/${BINARY_PRAGMA_DIR} util_dmx STATIC)
+set(DEPENDENCY_UTIL_DMX_INCLUDE ${PME_EXTERNAL_LIB_LOCATION}/util_dmx/include CACHE PATH "Path to include directory." FORCE)
+search_lib_recursive(DEPENDENCY_UTIL_DMX_LIBRARY util_dmx/${BINARY_PRAGMA_DIR} util_dmx STATIC "${PME_EXTERNAL_LIB_BIN_LOCATION}")
 
-if (NOT TARGET util_dmx)
-	add_subdirectory(external_libs/util_dmx)
-endif()
+
+
+#if (NOT TARGET util_dmx)
+#	add_subdirectory(external_libs/util_dmx)
+#endif()
 
 # link_generic_module_libraries()
 register_pragma_module(${PROJ_NAME})
 
 add_dependencies(${PROJ_NAME} util_dmx)
+set_property(GLOBAL PROPERTY PRAGMA_MODULE_SKIP_TARGET_PROPERTY_FOLDER 1)
