@@ -5,16 +5,13 @@ import stat
 from sys import platform
 from pathlib import Path
 
-
-
 # util_dmx
 git_clone_commit(
     "util_dmx",
     external_libs_dir +"/util_dmx",
     "https://github.com/Silverlan/util_dmx.git",
-    "0d7fca2"
+    "1d65c49a9d2c81d3b5a259d516167b8488a1614b"
 )
-
 
 cmake_args.append("-DPME_EXTERNAL_LIB_LOCATION=" +external_libs_dir)
 cmake_args.append("-DPME_EXTERNAL_LIB_BIN_LOCATION=" +external_libs_bin_dir)
