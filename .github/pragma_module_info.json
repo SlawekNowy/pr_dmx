@@ -1,0 +1,6 @@
+{
+    "name": "DMX",
+    "module_name": "pr_dmx",
+    "install_directory": "modules/",
+    "release_directory": "DEFAULT"
+}
